@@ -1,0 +1,42 @@
+
+line{
+    width: 60;
+}
+h3{
+    color: white;
+}
+.bar{
+   width: 60%;
+}
+
+h1{
+    font-size: 3rem;
+}
+p{
+    color: white;
+    font-size: x-large;
+}
+
+.heading{
+    margin:2rem 0 3rem 28rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    color:#423F3E;
+    
+}
+
+
+
+
+.navbar-brand{
+    font-size: 28px;
+}
+
+
+
+
+@media (max-width:780px) {
+    .heading{
+        margin:3rem 0 3rem 4rem;
+    }
+    
+}
