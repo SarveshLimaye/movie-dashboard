@@ -1,4 +1,6 @@
-
+p{
+    font-size: small;
+}
 line{
     width: 60;
 }
@@ -24,9 +26,13 @@ p{
     
 }
 
+.footer{
+    padding-bottom: 150px;
+}
 
-
-
+.pie-chart{
+    margin-top: 2rem;
+}
 .navbar-brand{
     font-size: 28px;
 }

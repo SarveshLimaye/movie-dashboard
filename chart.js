@@ -13,61 +13,78 @@ let actorName = [];
 let actorVote = [];
 
 
-// async function movieGraph() {
-//     await movies();
-//     const label = movieData.slice(0,7);
-//     let ctx = document.getElementById("doughnut").getContext("2d");
+async function movieGraph() {
+    await movies();
+    const label = movieData.slice(0,7);
+    let ctx = document.getElementById("doughnut").getContext("2d");
 
-// let chart = new Chart(ctx, {
-//   // The type of chart we want to create
-//   type: "pie",
+let chart = new Chart(ctx, {
+  // The type of chart we want to create
+  type: "pie",
 
-//   // The data for our dataset
-//   data: {
-//     labels: label,
-//     datasets: [
-//       {
-//          barPercentage: 1.0,
-//          fill: false,
-//         borderRadius: 0,
-//         tension: 0.5,
-//         label: label,
-//         backgroundColor: ['#FFB1C1','#FFE6AA','#9AD0F5','#EBE0FF','#DBF2F2'],
-//         borderColor: "#F09397",
-//         data: movieVote,
-//       },
-//     ],
-//   },
+  // The data for our dataset
+  data: {
+    labels: label,
+    datasets: [
+      {
+         barPercentage: 1.0,
+         fill: false,
+        borderRadius: 0,
+        tension: 0.5,
+        
+        backgroundColor: 
+            [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 205, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(201, 203, 207, 0.2)'
+              ],
+            borderColor: [
+                'rgb(255, 99, 132)',
+                'rgb(255, 159, 64)',
+                'rgb(255, 205, 86)',
+                'rgb(75, 192, 192)',
+                'rgb(54, 162, 235)',
+                'rgb(153, 102, 255)',
+                'rgb(201, 203, 207)'
+              ],
+        data: movieVote.slice(0,7),
+      },
+    ],
+  },
 
-//   // Configuration options go here
-//   options: {
-//     scales: {
-//       x: {
-//           display: false,
-//         grid: {
-//           display: false,
-//         },
-//       },
-//       y: {
-//         display: false,
-//         grid: {
-//           display: false,
-//         },
-//       },
-//     },
-//     cornerRadius: 5,
-//     responsive: true,
-//     maintainAspectRatio: false,
-//   },
-// });
-// }
+  // Configuration options go here
+  options: {
+    scales: {
+      x: {
+          display: false,
+        grid: {
+          display: false,
+        },
+      },
+      y: {
+        display: false,
+        grid: {
+          display: false,
+        },
+      },
+    },
+    cornerRadius: 5,
+    responsive: true,
+    maintainAspectRatio: false,
+  },
+});
+}
 
-// movieGraph();
+movieGraph();
 
 
 async function actorGraph() {
     await actorData();
-    const labels = actorName.slice(0,10);
+    const labels = actorName.slice(1,11)
     var ctx = document.getElementById('line').getContext('2d'); 
     var line = new Chart(ctx,{
         type: 'line',
@@ -75,7 +92,7 @@ async function actorGraph() {
             labels: labels,
   datasets: [{
     label: 'Treanding Actors Popularity %',
-    data: actorVote,
+    data: actorVote.slice(1,11),
     fill: false,
     borderColor: 'rgb(75, 192, 192)',
     tension: 0.1
@@ -109,7 +126,7 @@ var myChart = new Chart(ctx, {
         labels: labels,
         datasets: [{
             label: 'Trending Series Ratings',
-            data: voteData,
+            data: voteData.slice(0,10),
             barPercentage: 1.0,
             borderRadius: 5,
             backgroundColor: 
@@ -136,6 +153,11 @@ var myChart = new Chart(ctx, {
     },
     options: {
         scales: {
+            x:{
+                grid: {
+                    display: false,
+                  }
+            },
             y: {
                 beginAtZero: true
             },
@@ -178,13 +200,13 @@ async function actorData() {
 }
 
 async function movies() {
-    const url = "https://api.themoviedb.org/3/movie/top_rated?api_key=0e766b54350da2a8c8e20c574061a29a&language=en-US&page=1";
+    const url = "https://api.themoviedb.org/3/movie/popular?api_key=0e766b54350da2a8c8e20c574061a29a&language=en-US&page=1";
    const response = await fetch(url);
    const data = await response.json();
    console.log(data);
-   let movieName = data.results.map((movie) => movie.title);
-   movieName= movieData;
-   const voteCount = data.results.map((movie) => movie.vote_count);
+   const  movieName = data.results.map((movie) => movie.original_title);
+   movieData= movieName;
+   const voteCount = data.results.map((movie) => movie.vote_average);
     movieVote = voteCount;
     
 }
